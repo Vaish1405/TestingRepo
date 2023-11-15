@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '*/1 * * * *'
+      - cron: '0 * * * *'
 
 jobs:
   build:
@@ -13,22 +13,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8  # Use an appropriate Python version
+        uses: actions/setup-python@v4
+        with: 
+          python-version: 3.12
 
       - name: Install required dependencies
         run: |
-          python -m pip install -r requirements.txt
+          python -m pip install pytz  # Install any required Python packages
 
-      - name: Use Flask to run the Web application
+      - name: Build the greeting JSON
         run: |
-          python events.py
+          python greeting.py
 
-      - name: Deploy to GitHub Pages
+      # - name: Build the events JSON
+      #   run: |
+      #     python events.py
+
+      - name: Push to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
