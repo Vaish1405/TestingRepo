@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+      - cron: '0 * * * *'
+
+jobs:
+  build:
+    name: GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with: 
+          python-version: 3.12
+
+      - name: Install required dependencies
+        run: |
+          # Install any required Python packages
+          python -m pip install -r requirements.txt
+
+      - name: Use Flask to run the Web application
+        run: |
+          python events.py
+
+      - name: Push to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: public
+          CLEAN: true
