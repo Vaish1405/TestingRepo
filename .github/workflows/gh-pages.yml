@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-      - cron: '*/30 * * * * *'
+    - cron: '*/30 * * * * *'
 
 jobs:
   build:
@@ -16,20 +16,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v4
-        with: 
-          python-version: 3.12
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8  # Use an appropriate Python version
 
       - name: Install required dependencies
         run: |
-          # Install any required Python packages
           python -m pip install -r requirements.txt
 
       - name: Use Flask to run the Web application
         run: |
           python events.py
 
-      - name: Push to gh-pages branch
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
