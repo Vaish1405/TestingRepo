@@ -5,26 +5,20 @@ on:
     branches:
       - master
   schedule:
-      - cron: '*/1 * * * *'
+    - cron: '*/1 * * * *'
 
 jobs:
   build:
     name: GitHub Pages
     runs-on: ubuntu-latest
     steps:
-      # Reference a specific commit
-      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
-      # Reference the major version of a release
-      - uses: actions/checkout@v4
-      # Reference a specific version
-      - uses: actions/checkout@v4.2.0
-      # Reference a branch
-      - uses: actions/checkout@main
-
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
       - name: Set up Python
-        uses: actions/setup-python@v4
-        with: 
-          python-version: 3.12
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9  # Use a valid Python version
 
       - name: Install required dependencies
         run: |
@@ -34,6 +28,7 @@ jobs:
         run: |
           python greeting.py
 
+      # Uncomment the following block if you have an 'events.py' file
       # - name: Build the events JSON
       #   run: |
       #     python events.py
