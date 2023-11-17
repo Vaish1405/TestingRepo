@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    </head>
+    <body> 
+        <div class="container">
+            <div class="container2" style=" scroll-behavior: smooth;  -webkit-overflow-scrolling: touch;">
+              <a href="{{ url }}"
+                rel="opener" class="box01"> 
+                <div class="box1">
+                  <img src="https://placehold.co/600x400" alt="Your Image">
+                  <div class="overlay"></div>
+                  <div class="h3">
+                    <span class="title">
+                      {{ title }}
+                    </span>
+                  </div>
+                  <div id="details">
+                    <div id="date">
+                      {{ date }}
+                    </div>
+                    <div id="time">
+                      <strong>Time: </strong>{{ time }}
+                    </div>
+                    <div id="location">
+                      <strong>Location: </strong>{{ location }}
+                    </div>
+                  </div>
+                </div>
+            </a>
+            </div>
+        </div>
+    </body>
+</html>
