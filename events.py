@@ -12,3 +12,6 @@ with open('template/events.html') as f:
     template = Template(f.read())
     output = template.render(url='https://vaish1405.github.io/', date='12/15/2023', title='Hello', location='Northridge', time='10:00PM')
     print(output)
+
+    with open(os.path.join(directory, 'events.py'), 'w') as file:
+        file.write(output, file, indent=4)
