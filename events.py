@@ -9,7 +9,11 @@ import os
 from jinja2 import Template
 
 with open('template/events.html') as f:
-    directory = "public/json"
+    directory = "public/events"
+
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
     template = Template(f.read())
     output = template.render(url='https://vaish1405.github.io/', date='12/15/2023', title='Hello', location='Northridge', time='10:00PM')
     print(output)
